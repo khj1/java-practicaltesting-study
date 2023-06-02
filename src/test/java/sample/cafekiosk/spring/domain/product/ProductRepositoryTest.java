@@ -71,4 +71,47 @@ class ProductRepositoryTest {
 
 	}
 
+	@DisplayName("상품 고유번호로 상품을 조회할 수 있다.")
+	@Test
+	void findAllByProductNumberIn() {
+		// given
+		Product productA = Product.builder()
+				.productNumber("001")
+				.type(HANDMADE)
+				.sellingStatus(SELLING)
+				.name("아메리카노")
+				.price(4_000)
+				.build();
+
+		Product productB = Product.builder()
+				.productNumber("002")
+				.type(HANDMADE)
+				.sellingStatus(HOLD)
+				.name("카페라떼")
+				.price(4_000)
+				.build();
+
+		Product productC = Product.builder()
+				.productNumber("003")
+				.type(HANDMADE)
+				.sellingStatus(STOP_SELLING)
+				.name("팥빙수")
+				.price(4_000)
+				.build();
+
+		productRepository.saveAll(List.of(productA, productB, productC));
+
+		// when
+		List<Product> products = productRepository.findAllByProductNumberIn(List.of("001", "002"));
+
+		//then
+		assertThat(products).hasSize(2)
+				.extracting("productNumber", "name")
+				.containsExactlyInAnyOrder(
+						tuple("001", "아메리카노"),
+						tuple("002", "카페라떼")
+				);
+
+	}
+
 }
