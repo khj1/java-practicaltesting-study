@@ -34,6 +34,12 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 }
 
+// UTF-8 인코딩 추가
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
