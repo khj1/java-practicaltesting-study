@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import sample.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import sample.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import sample.cafekiosk.spring.api.service.product.response.ProductResponse;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductRepository;
@@ -32,7 +32,7 @@ public class ProductService {
 	 * 상품 등록의 경우에도 동시성 문제가 발생할 수 있다.
 	 */
 	@Transactional
-	public ProductResponse createProduct(final ProductCreateRequest request) {
+	public ProductResponse createProduct(final ProductCreateServiceRequest request) {
 		String newProductNumber = createNewProductNumber();
 
 		Product product = request.toEntity(newProductNumber);

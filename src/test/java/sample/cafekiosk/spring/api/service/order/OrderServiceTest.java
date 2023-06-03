@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import sample.cafekiosk.spring.api.service.order.request.OrderCreateRequest;
+import sample.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.cafekiosk.spring.api.service.order.response.OrderResponse;
 import sample.cafekiosk.spring.domain.order.OrderRepository;
 import sample.cafekiosk.spring.domain.orderproduct.OrderProductRepository;
@@ -65,7 +65,7 @@ class OrderServiceTest {
 		Product productC = createProduct(HANDMADE, "003", 3_000);
 		productRepository.saveAll(List.of(productA, productB, productC));
 
-		OrderCreateRequest request = OrderCreateRequest.builder()
+		OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
 				.productNumbers(List.of("001", "002"))
 				.build();
 
@@ -100,7 +100,7 @@ class OrderServiceTest {
 		Product productC = createProduct(HANDMADE, "003", 3_000);
 		productRepository.saveAll(List.of(productA, productB, productC));
 
-		OrderCreateRequest request = OrderCreateRequest.builder()
+		OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
 				.productNumbers(List.of("001", "001"))
 				.build();
 
@@ -137,7 +137,7 @@ class OrderServiceTest {
 
 		stockRepository.saveAll(List.of(stockA, stockB));
 
-		OrderCreateRequest request = OrderCreateRequest.builder()
+		OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
 				.productNumbers(List.of("001", "001", "002", "003"))
 				.build();
 
@@ -182,7 +182,7 @@ class OrderServiceTest {
 		Stock stockB = Stock.create("002", 1);
 		stockRepository.saveAll(List.of(stockA, stockB));
 
-		OrderCreateRequest request = OrderCreateRequest.builder()
+		OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
 				.productNumbers(List.of("001", "001", "002", "003"))
 				.build();
 

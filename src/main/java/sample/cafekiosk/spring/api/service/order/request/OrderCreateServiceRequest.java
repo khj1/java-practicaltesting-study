@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class OrderCreateRequest {
+public class OrderCreateServiceRequest {
 
 	private List<String> productNumbers;
 
 	@Builder
-	public OrderCreateRequest(final List<String> productNumbers) {
+	public OrderCreateServiceRequest(final List<String> productNumbers) {
 		this.productNumbers = productNumbers;
 	}
 }
