@@ -3,13 +3,13 @@ package sample.cafekiosk.spring.api.service.mail;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -52,9 +52,13 @@ class MailServiceTest {
 		// when(mailSendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
 		// 		.thenReturn(true);
 
-		doReturn(true)
-				.when(mailSendClient)
-				.sendEmail(anyString(), anyString(), anyString(), anyString());
+		// doReturn(true)
+		// 		.when(mailSendClient)
+		// 		.sendEmail(anyString(), anyString(), anyString(), anyString());
+
+		// given 절인데 when() 문법을 사용하는게 어색해보여서 만들어졌다.
+		BDDMockito.given(mailSendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
+				.willReturn(true);
 
 		// when
 		boolean result = mailService.sendMail("", "", "", "");
