@@ -11,12 +11,12 @@ import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import sample.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.cafekiosk.spring.api.service.order.response.OrderResponse;
@@ -29,14 +29,13 @@ import sample.cafekiosk.spring.domain.stock.Stock;
 import sample.cafekiosk.spring.domain.stock.StockRepository;
 
 @ActiveProfiles("test")
-@Transactional
 @SpringBootTest
 class OrderServiceTest {
 
 	@Autowired
-	private OrderProductRepository orderProductRepository;
-	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
+	private OrderProductRepository orderProductRepository;
 	@Autowired
 	private StockRepository stockRepository;
 	@Autowired
@@ -50,12 +49,14 @@ class OrderServiceTest {
 	 * 	- 테스트에 붙여놓은 @Transactional 어노테이션 때문에 실제 서비스 로직에도 @Transactional
 	 * 		이 적용된 것처럼 착각할 수 있다.
 	 */
-	// @AfterEach
-	// void tearDown() {
-	// 	orderProductRepository.deleteAllInBatch();
-	// 	productRepository.deleteAllInBatch();
-	// 	orderRepository.deleteAllInBatch();
-	// }
+	@BeforeEach
+	void setUp() {
+		orderProductRepository.deleteAllInBatch();
+		orderRepository.deleteAllInBatch();
+		productRepository.deleteAllInBatch();
+		stockRepository.deleteAllInBatch();
+	}
+
 	@DisplayName("주문번호 리스트를 받아 주문을 생성한다.")
 	@Test
 	void createOrder() {
