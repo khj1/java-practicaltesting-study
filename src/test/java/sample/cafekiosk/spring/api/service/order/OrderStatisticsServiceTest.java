@@ -33,6 +33,11 @@ import sample.cafekiosk.spring.domain.product.ProductType;
 /**
  * 메일 전송 기능 같은 경우 매 테스트마다 진짜 메일을 전송하면
  * 시간적으로나 리소스적으로나 낭비가 될 것이다. 따라서 이런 기능들은 Mocking 을 통해 테스트해주면 된다.
+ *
+ * Stub vs Mock
+ * - 둘 다 특정한 메서드에 대한 결과를 명세하고
+ * - Stub: 상태 검증
+ * - Mock: 행위 검증
  */
 @Transactional
 @SpringBootTest
