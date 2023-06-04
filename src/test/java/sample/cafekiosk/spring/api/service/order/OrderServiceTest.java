@@ -11,7 +11,7 @@ import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import sample.cafekiosk.spring.domain.stock.Stock;
 import sample.cafekiosk.spring.domain.stock.StockRepository;
 
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest(properties = "spring.profiles.active=test")
 class OrderServiceTest {
 
 	@Autowired
@@ -48,12 +48,19 @@ class OrderServiceTest {
 	 * @Transactional 을 사용해서 발생하는 문제점도 있다.
 	 * 	- 테스트에 붙여놓은 @Transactional 어노테이션 때문에 실제 서비스 로직에도 @Transactional
 	 * 		이 적용된 것처럼 착각할 수 있다.
+	 *
+	 * 	deleteAllInBatch() vs deleteAll()
+	 * 	- deleteAllInBatch()는 테이블을 통으로 지워준다.
+	 * 	- delete 쿼리 한번으로 끝난다.
+	 * 	- deleteAll()은 연관된 컬럼이 뭐가 있는지 일일이 검색하고(select) 하나하나 지운다.
+	 * 	- 연관된 컬럼이 모두 지워지면 그때 테이블을 지운다.
+	 * 	- deleteAllInBatch()이 간편하다. 하지만 연관관계에 따라 테이블 제거 순서를 정확히 지켜줘야한다.
 	 */
-	@BeforeEach
-	void setUp() {
+	@AfterEach
+	void tearDown() {
 		orderProductRepository.deleteAllInBatch();
-		orderRepository.deleteAllInBatch();
 		productRepository.deleteAllInBatch();
+		orderRepository.deleteAllInBatch();
 		stockRepository.deleteAllInBatch();
 	}
 

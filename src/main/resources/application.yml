@@ -13,7 +13,6 @@ spring:
       ddl-auto: none
 
 ---
-
 spring:
   config:
     activate:
@@ -26,14 +25,13 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    defer-datasource-initialization: true # (2.5~) Hibernate \uCD08\uAE30\uD654 \uC774\uD6C4 data.sql \uC2E4\uD589
+    defer-datasource-initialization: true # (2.5~) Hibernate 초기화 이후 data.sql 실행
 
   h2:
     console:
       enabled: true
 
 ---
-
 spring:
   config:
     activate:
@@ -50,6 +48,3 @@ spring:
   sql:
     init:
       mode: never
-
-
-

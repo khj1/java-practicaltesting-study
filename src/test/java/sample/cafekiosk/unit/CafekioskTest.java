@@ -110,6 +110,10 @@ class CafekioskTest {
 		assertThat(totalPrice).isEqualTo(8_500);
 	}
 
+	/**
+	 * 테스트 환경이 완벽하게 통제되지 않았다.
+	 * - 현재 시간이 몇 시인지에 따라 테스트 결과가 다르게 나타날 수 있음
+	 */
 	@Test
 	void createOrder() {
 		Cafekiosk cafekiosk = new Cafekiosk();
