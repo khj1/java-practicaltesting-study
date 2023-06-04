@@ -32,6 +32,10 @@ import sample.cafekiosk.spring.domain.history.mail.MailSendHistoryRepository;
  * - 이럴때 @Spy 가 굉장히 유용하다.
  * - @Spy 는 실제 객체를 기반으로 만들어지기 때문에 Mocito의 when() 메서드를 사용할 수 없다.
  * 	- 대신 doReturn(), doNothing() 등의 do() 메서드를 활용하면 된다.
+ *
+ * 실제 프로덕션 코드에서 런타임 시점에서 일어날 일을 정확하게 Stubbing 했다고 단언할 수 있는가?
+ * - Mock 에 대해 비판적인 시각을 갖는 것도 중요하다.
+ * - 다른 모듈, 외부 시스템과 함께 맞물렸을 때 어떤 오류가 발생할지는 아무도 모른다.
  */
 @ExtendWith(MockitoExtension.class)
 class MailServiceTest {
