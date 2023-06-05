@@ -27,13 +27,14 @@ import sample.cafekiosk.spring.domain.product.ProductSellingStatus;
 public class ProductService {
 
 	private final ProductRepository productRepository;
+	private final ProductNumberFactory productNumberFactory;
 
 	/**
 	 * 상품 등록의 경우에도 동시성 문제가 발생할 수 있다.
 	 */
 	@Transactional
 	public ProductResponse createProduct(final ProductCreateServiceRequest request) {
-		String newProductNumber = createNewProductNumber();
+		String newProductNumber = productNumberFactory.createNewProductNumber();
 
 		Product product = request.toEntity(newProductNumber);
 		Product savedProduct = productRepository.save(product);
@@ -47,14 +48,6 @@ public class ProductService {
 		return products.stream()
 				.map(ProductResponse::of)
 				.collect(Collectors.toList());
-	}
-
-	private String createNewProductNumber() {
-		String latestProductNumber = productRepository.findLatestProductNumber();
-		if (latestProductNumber == null) {
-			return "001";
-		}
-		return String.format("%03d", Integer.parseInt(latestProductNumber) + 1);
 	}
 
 }
