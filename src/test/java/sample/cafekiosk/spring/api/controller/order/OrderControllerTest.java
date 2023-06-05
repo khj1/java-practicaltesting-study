@@ -9,28 +9,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import sample.cafekiosk.spring.api.service.order.OrderService;
+import sample.cafekiosk.spring.ControllerSupportTest;
 import sample.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 
-@WebMvcTest(controllers = OrderController.class)
-class OrderControllerTest {
-
-	@Autowired
-	private MockMvc mockMvc;
-
-	@Autowired
-	private ObjectMapper objectMapper;
-
-	@MockBean
-	private OrderService orderService;
+class OrderControllerTest extends ControllerSupportTest {
 
 	@DisplayName("주문을 생성할 수 있다.")
 	@Test

@@ -12,17 +12,17 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+
+import sample.cafekiosk.spring.IntegrationTestSupport;
 
 /**
  * Repository Test는 사실상 단위 테스트에 가깝다.
  * - SpringBootTest vs DataJpaTest
  * - DataJpaTest가 Jpa 관련 빈들만 로딩하기 때문에 더 가볍지만 강사님은 SpringBootTest를 더 선호한다.
  */
-@ActiveProfiles("test")
-@DataJpaTest
-class ProductRepositoryTest {
+@Transactional
+class ProductRepositoryTest extends IntegrationTestSupport {
 
 	@Autowired
 	private ProductRepository productRepository;

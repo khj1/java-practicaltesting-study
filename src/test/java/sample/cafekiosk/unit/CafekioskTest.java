@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -114,6 +115,7 @@ class CafekioskTest {
 	 * 테스트 환경이 완벽하게 통제되지 않았다.
 	 * - 현재 시간이 몇 시인지에 따라 테스트 결과가 다르게 나타날 수 있음
 	 */
+	@Disabled
 	@Test
 	void createOrder() {
 		Cafekiosk cafekiosk = new Cafekiosk();

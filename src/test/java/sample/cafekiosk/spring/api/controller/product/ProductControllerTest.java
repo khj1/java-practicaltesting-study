@@ -13,33 +13,17 @@ import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import sample.cafekiosk.spring.ControllerSupportTest;
 import sample.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
-import sample.cafekiosk.spring.api.service.product.ProductService;
 import sample.cafekiosk.spring.api.service.product.response.ProductResponse;
 
 /**
  * @SpringBootTest 가 전체 에플리케이션 빈을 관장한다면
  * @WebMvcTest 는 좀 더 Presentation Layer와 관련된 빈들만 올린다.
  */
-@WebMvcTest(controllers = ProductController.class)
-class ProductControllerTest {
-
-	@Autowired
-	private MockMvc mockMvc;
-
-	@Autowired
-	private ObjectMapper objectMapper;
-
-	@MockBean
-	private ProductService productService;
+class ProductControllerTest extends ControllerSupportTest {
 
 	@DisplayName("신규 상품을 등록한다.")
 	@Test
