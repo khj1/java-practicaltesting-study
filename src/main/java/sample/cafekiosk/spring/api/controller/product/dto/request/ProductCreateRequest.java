@@ -38,6 +38,12 @@ public class ProductCreateRequest {
 	@Positive(message = "상품 가격은 양수여야 합니다.")
 	private int price;
 
+	/**
+	 * 테스트에서 필요하지만 프로덕션 코드에선 사용되지 않는 메서도, 만들어도 될까?
+	 * - 만들어도 된다! 단 보수적으로 접근하자
+	 * - 해당 메서드가 해당 객체에 마땅이 존재해도 되는 메서드(행위)이거나(생성자, 빌더, size() 등등)
+	 * - 미래에도 충분히 사용될 여지가 있는 메서드라면 만들어도 무방하다.
+	 */
 	@Builder
 	public ProductCreateRequest(final ProductType type, final ProductSellingStatus sellingStatus, final String name,
 								final int price) {
